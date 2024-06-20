@@ -1,0 +1,94 @@
+```API TESTING```
+Blog: https://portswigger.net/web-security/api-testing
+
+Labs: https://portswigger.net/web-security/all-labs
+
+Notes: 
+API documentation:
+==> Documentation can be in both human-readable and 
+    machine-readable forms
+
+==> You can also parse OpenAPI documentation using 
+    the OpenAPI Parser BApp. 
+
+==> GET - Retrieves data from a resource.
+    PATCH - Applies partial changes to a resource.
+    OPTIONS - Retrieves information on the types of request methods that can be used on a resource.
+
+==> Note
+    When testing different HTTP methods, target low-priority objects. This helps make sure that you avoid unintended consequences, for example altering critical items or creating excessive records.
+
+==> Identifying supported content types:
+    Changing the content type may enable you to
+    Trigger errors that disclose useful information.
+    Bypass flawed defenses.
+    Take advantage of differences in processing logic. For example, an API may be secure when handling JSON data but susceptible to injection attacks when dealing with XML.
+
+==> Required knowledge
+
+    To solve this lab, you'll need to know:
+
+    How to use error messages to construct a valid request.
+    How HTTP methods are used by RESTful APIs.
+    How changing the HTTP method can reveal additional functionality.
+
+==>  Server-side parameter pollution
+     Some systems contain internal APIs that aren't directly accessible from the internet. Server-side parameter pollution occurs when a website embeds user input in a server-side request to an internal API without adequate encoding. This means that an attacker may be able to manipulate or inject parameters, which may enable them to, for example:
+     Override existing parameters.
+     Modify the application behavior.
+     Access unauthorized data.
+
+==> Always add  # and &  as url encoded username and 
+    password fileds and fuzz for further fields
+    also check the PARAMETER POLLUTION with Path traversal
+    which may leaks
+   for Endpoint finding you can use the API documention
+   and the js Files 
+  
+
+
+What I have learned is that the usage of particular Api
+Endpoint for sake of usage to do a certain task
+
+Patch: Method is to change a little in the appilcation
+
+
+	Mass-assignment Pentesting Methodology:
+ The researcher had 2 accounts — 1 with higher privileges and one with lower privileges. He then made profile updation requests to an endpoint and observed the parameters being passed in both the accounts — unprivileged and privileged.
+
+ This gave him a hint that there was an extra parameter in the API requests which was sent in the privileged user’s profile update request.
+
+ So the next natural step was to try setting the same parameter in the unprivileged user’s profile update request, and voila! That resulted in giving the unprivileged user privileged access! Bingo — that was Mass Assignment in action.
+
+Tip: In our experience, we have also seen that sometimes the response to the updation requests reveals such parameters as well, and thus those should also be looked at while hunting for this vulnerability.
+
+Alternative Names¶
+Depending on the language/framework in question, this vulnerability can have several alternative names:
+
+Mass Assignment: Ruby on Rails, NodeJS.
+Autobinding: Spring MVC, ASP NET MVC.
+Object injection: PHP.
+
+Case Studies: Mass Assignment Vulnerabilities:
+
+*****Testing mass assignment vulnerabilities****
+
+To test whether you can modify the enumerated isAdmin parameter value, add it to the PATCH request: 
+
+1 https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html
+2 https://infosecwriteups.com/mass-assignment-leads-to-the-victims-account-being-inaccessible-forever-52e48c6a8a4d
+3 https://ine.com/blog/hunting-for-mass-assignment
+4 https://www.bugbountyhunter.com/articles/?on=mass-assignment-and-learning-new-things
+5 https://hackerone.com/reports/99424
+6 https://rdnzx.medium.com/idor-and-mass-assignment-attacks-leads-to-full-account-takeover-of-internal-employees-a59cd998e568
+7 https://www.aeth.cc/public/Article-Pass-Culture/mass-assignment-article-en.html
+8 https://blog.shiftleft.io/api-security-101-excessive-data-exposure-a730d351fbae
+9 https://blog.shiftleft.io/api-security-101-excessive-data-exposure-a730d351fbae
+10 https://www.traceable.ai/blog-post/mass-assignment
+
+*****Testing mass assignment vulnerabilities****
+
+The Ultimate resorces for the parameter Pollution
+
+11: https://x.com/gregxsunday/status/1803055034977980568 
+
